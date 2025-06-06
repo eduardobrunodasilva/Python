@@ -1,11 +1,10 @@
 from random import randint, choice
 from time import sleep
 
-# Números mais e menos sorteados (exemplos fictícios)
 mais_sorteados = [5, 10, 23, 33, 42, 53, 27, 8, 30, 47]
 menos_sorteados = [3, 14, 21, 36, 44, 60, 2, 18, 39, 49]
 
-# Define os blocos
+
 blocos = {
     1: list(range(1, 16)),
     2: list(range(16, 31)),
@@ -18,16 +17,16 @@ def gerar_jogo():
     pares = set()
     impares = set()
 
-    # Define uma combinação de pares e ímpares válida
+
     combinacoes = [(3, 3), (4, 2), (2, 4)]
     num_pares, num_impares = choice(combinacoes)
 
-    # Garante pelo menos um número de cada bloco
+
     numeros_possiveis = []
     for bloco in blocos.values():
         numeros_possiveis.append(choice(bloco))
 
-    # Preenche o restante com base em mais e menos sorteados
+
     while len(numeros_possiveis) < 6:
         if randint(0, 1):
             candidato = choice(mais_sorteados)
@@ -36,14 +35,14 @@ def gerar_jogo():
         if candidato not in numeros_possiveis:
             numeros_possiveis.append(candidato)
 
-    # Filtra para obter os pares e ímpares de acordo com a combinação sorteada
+
     for num in numeros_possiveis:
         if num % 2 == 0 and len(pares) < num_pares:
             pares.add(num)
         elif num % 2 != 0 and len(impares) < num_impares:
             impares.add(num)
 
-    # Preenche faltantes aleatoriamente, se não atingir as quantidades
+
     while len(pares) < num_pares:
         num = randint(1, 60)
         if num % 2 == 0 and num not in pares and num not in impares:
@@ -57,7 +56,7 @@ def gerar_jogo():
     jogo.sort()
     return jogo
 
-# Interface com o usuário
+
 print('-' * 30)
 print('       JOGA NA MEGA SENA       ')
 print('-' * 30)
